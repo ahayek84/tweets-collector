@@ -26,14 +26,23 @@ if __name__ == '__main__':
     queries = args.keywords_file.read().splitlines()
     number = args.number
     lang = args.lang
-    for query in queries:
-        print('query: {}'.format(query))
-        count = 0
-        tweets = tweepy.Cursor(api.search, q=query, count=number,
-                           lang=lang, tweet_mode='extended').items()
-        outfile = open('{}.json'.format('query'), mode='w')
-        for tweet in tweets:
-            outfile.write(json.dumps(tweet._json))
-            outfile.write('\n')
-            count +=1
-        print('{} tweets'.format(count))
+    try:
+        for query in queries:
+            print('query: {}'.format(query))
+            print('count: {}'.format(number))
+            print('lang: {}'.format(lang))
+            count = 0
+            tweets = tweepy.Cursor(api.search, q=query, count=number,
+                               lang=lang, tweet_mode='extended').items()
+
+            outfile = open('{}.json'.format('query'), mode='a+')
+            for tweet in tweets:
+                if count == number:
+                    break;
+                else:
+                    outfile.write(json.dumps(tweet._json))
+                    outfile.write('\n')
+                    count +=1
+            print('{} tweets'.format(count))
+    except:
+        print('429 TwitterAPI: Too many requests')
