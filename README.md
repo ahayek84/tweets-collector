@@ -3,6 +3,13 @@ Collect tweets (tweets corpus) using Twitter API.
 
 Collection can be based on hashtags, keywords, geographical location.
 
+## install tweet-preprocessor for windows  
+```git clone https://github.com/rrmina/preprocessor.git``` <br/>
+```cd preprocessor``` <br/>
+```conda activate bti``` <br/>
+```python setup.py install``` <br/>
+
+
 ## install requirements 
 ```pip install -r requirements.txt```
  
