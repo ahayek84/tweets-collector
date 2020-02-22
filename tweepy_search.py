@@ -4,6 +4,10 @@ import json
 import argparse
 import argcomplete
 
+'''''
+python tweepy_search.py --keywords-file search_keys.txt --number 100 --lang en
+'''''
+
 
 auth = tweepy.OAuthHandler(api_keys.consumer_key, api_keys.consumer_secret)
 auth.set_access_token(api_keys.access_token, api_keys.access_secret)
