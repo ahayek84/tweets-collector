@@ -5,7 +5,7 @@ import argparse
 import argcomplete
 
 '''''
-python tweepy_search.py --keywords-file search_keys.txt --number 100 --lang en
+python tweepy_search.py --keywords-file search_keys.txt --number 1 --lang en
 '''''
 
 
@@ -44,6 +44,9 @@ if __name__ == '__main__':
                 if count == number:
                     break;
                 else:
+                    tload = tweet._json
+                    #print(count)
+                    #print(tload["created_at"])
                     outfile.write(json.dumps(tweet._json))
                     outfile.write('\n')
                     count +=1

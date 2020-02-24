@@ -3,6 +3,10 @@ import tweet_cleaner
 import json
 import argparse
 
+'''
+python json2text.py -i query.json -o tweets_txt --remove-repeated-letters
+'''
+
 parser = argparse.ArgumentParser(description='extract tweet from json and write them into xls file')
 parser.add_argument('-i', '--json-file', type=argparse.FileType(mode='r', encoding='utf-8'), help='input json file.', required=True)
 parser.add_argument('-o', '--out-file', type=str, help='the output file.', required=True)

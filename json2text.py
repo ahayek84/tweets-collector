@@ -3,7 +3,11 @@ import json
 import os
 import sys
 
-import tweet_cleaner
+'''
+python json2text.py -i query.json -o tweets_txt --remove-repeated-letters
+'''
+
+import tweet_cleaner_english as tweet_cleaner
 
 parser = argparse.ArgumentParser(description='extract tweet texts from json')
 parser.add_argument('-i', '--json-dir', type=str,
@@ -35,7 +39,7 @@ def extract_tweets_from_json(json_reader, text_writer):
                 # load it as Python dict
                 tweet = json.loads(json_tweet)
                 tid = tweet['id']
-                text = tweet['text']
+                text = tweet['full_text']
                 text = tweet_cleaner.clean_tweet(text)
                 if args.normalize:
                     text = tweet_cleaner.normalize_arabic(text)
