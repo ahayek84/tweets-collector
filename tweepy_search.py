@@ -22,9 +22,8 @@ parser.add_argument('-n', '--number', type=int,
                     help='the number of tweets that you want to collect', required=True)
 parser.add_argument('-l', '--lang', type=str,
                     help='language', required=True)
-parser.add_argument('-gl', '--geo', type=str,
-                    help='geo location coordinates from http://boundingbox.klokantech.com '
-                         'copy and past using csv option',
+parser.add_argument('-gl', '--geo-file', type=argparse.FileType(mode='r', encoding='utf-8'),
+                    help='geo location file. The file should contain one [longtitude,latitude,radius #CountryName] per line',
                     required=False)
 
 
@@ -35,6 +34,9 @@ if __name__ == '__main__':
     number = args.number
     lang = args.lang
     geo = args.geo
+    location_str = "52.251231,5.712159,3000km #Netherlands"
+    location_geo = location_str.split(" #",1)[0]
+    location_name = location_str.split(" #", 1)[1]
     try:
         for query in queries:
             print('query: {}'.format(query))
@@ -42,7 +44,7 @@ if __name__ == '__main__':
             print('lang: {}'.format(lang))
             count = 0
             tweets = tweepy.Cursor(api.search, q=query, count=number,
-                               lang=lang, tweet_mode='extended',geocode = "5.29126,52.132633,3000km").items()
+                               lang=lang, tweet_mode='extended',geocode = location_geo).items()
 
             outfile = open('{}.json'.format('query'), mode='a+')
             for tweet in tweets:
@@ -50,9 +52,8 @@ if __name__ == '__main__':
                     break;
                 else:
                     tload = tweet._json
-                    #print(count)
-                    #print(tload["created_at"])
-                    outfile.write(json.dumps(tweet._json))
+                    tload['TweetLocation'] = location_name
+                    outfile.write(json.dumps(tload))
                     outfile.write('\n')
                     count +=1
             print('{} tweets'.format(count))
