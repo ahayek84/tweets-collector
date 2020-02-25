@@ -4,7 +4,7 @@ import json
 import argparse
 
 '''
-python json2text.py -i query.json -o tweets_txt --remove-repeated-letters
+python json2xls.py -i tweets_json\query_25022020.json -o tweets_txt\query_25022020.xls 
 '''
 
 parser = argparse.ArgumentParser(description='extract tweet from json and write them into xls file')

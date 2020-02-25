@@ -34,7 +34,7 @@ def get_tweets(my_locations, outfile, stop_num):
     # Bounding boxes for geo-locations
     # http://boundingbox.klokantech.com/
     # Online-Tool to create boxes (c+p as raw CSV):
-    twitter_stream.filter(locations=my_locations, async=True)
+    twitter_stream.filter(locations=my_locations,async=True)
 
 
 if __name__ == '__main__':

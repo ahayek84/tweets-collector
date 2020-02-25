@@ -5,7 +5,7 @@ import argparse
 import argcomplete
 
 '''''
-python tweepy_search.py --keywords-file search_keys.txt --number 1 --lang en
+python tweepy_search.py --keywords-file search_keys.txt --number 100 --lang en -gl 37.781157 -122.398720 1mi
 '''''
 
 
@@ -22,6 +22,10 @@ parser.add_argument('-n', '--number', type=int,
                     help='the number of tweets that you want to collect', required=True)
 parser.add_argument('-l', '--lang', type=str,
                     help='language', required=True)
+parser.add_argument('-gl', '--geo', type=str,
+                    help='geo location coordinates from http://boundingbox.klokantech.com '
+                         'copy and past using csv option',
+                    required=False)
 
 
 if __name__ == '__main__':
@@ -30,6 +34,7 @@ if __name__ == '__main__':
     queries = args.keywords_file.read().splitlines()
     number = args.number
     lang = args.lang
+    geo = args.geo
     try:
         for query in queries:
             print('query: {}'.format(query))
@@ -37,7 +42,7 @@ if __name__ == '__main__':
             print('lang: {}'.format(lang))
             count = 0
             tweets = tweepy.Cursor(api.search, q=query, count=number,
-                               lang=lang, tweet_mode='extended').items()
+                               lang=lang, tweet_mode='extended',geocode = "5.29126,52.132633,3000km").items()
 
             outfile = open('{}.json'.format('query'), mode='a+')
             for tweet in tweets:

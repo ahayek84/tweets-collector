@@ -4,7 +4,7 @@ import os
 import sys
 
 '''
-python json2text.py -i query.json -o tweets_txt --remove-repeated-letters
+python json2text.py -i tweets_json -o tweets_txt --remove-repeated-letters --keep-only-arabic
 '''
 
 import tweet_cleaner_english as tweet_cleaner
